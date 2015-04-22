@@ -1,0 +1,34 @@
+{
+  "name": "paslandau/pagerank",
+  "license": "MIT",
+  "description": "Calculating the PageRank of nodes in a linked graph",
+  "authors": [
+    {
+      "name": "Pascal Landau",
+      "email": "kontakt@myseosolution.de",
+      "homepage": "http://www.myseosolution.de",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "paslandau\\PageRank\\": "src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packages.myseosolution.de/"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "~5.5",
+    "psr/log": "~1",
+    "monolog/monolog": "~1",
+    "paslandau/io-utility": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4"
+  }
+}
