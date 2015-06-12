@@ -1,15 +1,14 @@
 <?php
 
-use paslandau\PageRank\CsvIO;
+use paslandau\PageRank\Calculation\PageRank;
+use paslandau\PageRank\Calculation\ResultFormatter;
 use paslandau\PageRank\Edge;
 use paslandau\PageRank\Graph;
 use paslandau\PageRank\Node;
-use paslandau\PageRank\PageRankNode;
-use paslandau\PageRank\PageRank;
-use paslandau\PageRank\ResultFormatter;
 
-require_once "bootstrap.php";
+require_once __DIR__."/bootstrap.php";
 
+// define the nodes
 $a = new Node("a");
 $b = new Node("b");
 $c = new Node("c");
@@ -23,6 +22,8 @@ $x4 = new Node("x4");
 $x5 = new Node("x5");
 
 $graph = new Graph();
+// uncomment to get the results of the german example http://de.wikipedia.org/wiki/PageRank
+// leave commented for the results of the english one http://en.wikipedia.org/wiki/PageRank
 //$graph->addEdge(new Edge($a,$a));
 //$graph->addEdge(new Edge($a,$b));
 //$graph->addEdge(new Edge($a,$c));
@@ -35,6 +36,7 @@ $graph = new Graph();
 //$graph->addEdge(new Edge($a,$x4));
 //$graph->addEdge(new Edge($a,$x5));
 
+// define the links between the nodes
 $graph->addEdge(new Edge($b, $c));
 
 $graph->addEdge(new Edge($c, $b));
@@ -58,18 +60,10 @@ $graph->addEdge(new Edge($x3, $e));
 $graph->addEdge(new Edge($x4, $e));
 $graph->addEdge(new Edge($x5, $e));
 
+// calculate the PageRank
 $pageRank = new PageRank();
-$result = $pageRank->calculatePagerank($graph, true);
+$result = $pageRank->calculatePagerank($graph);
 
+// print the result
 $formatter = new ResultFormatter(4);
 echo $formatter->toString($result);
-$last = $result->getLastHistoryEntry()->toArray();
-$nodes =  $result->getNodes();
-foreach ($last as $key => $val) {
-    if (array_key_exists($key, $nodes)) {
-        $last[$key]["in"] = count($nodes[$key]->getInlinks());
-        $last[$key]["out"] = count($nodes[$key]->getOutlinks());
-    }
-}
-//$io = new CsvIO();
-//$io->export("test.csv", $last, "cp1252", ";");

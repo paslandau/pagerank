@@ -1,8 +1,12 @@
 <?php
 
-namespace paslandau\PageRank;
+namespace paslandau\PageRank\Calculation;
 
-
+/**
+ * Holds information about a node in a specific round during the PageRank calculation
+ * (old PageRank value and newly calculated PageRank value)
+ * @package paslandau\PageRank
+ */
 class PageRankNodeHistoryEntry {
     /**
      * @var PageRankNode

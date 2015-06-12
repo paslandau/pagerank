@@ -1,6 +1,6 @@
 <?php
 
-namespace paslandau\PageRank;
+namespace paslandau\PageRank\Logging;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -19,7 +19,7 @@ trait LoggerTrait
 //            $log = new NullLogger();
             $name = (new \ReflectionClass($this))->getShortName();
             $log = new Logger($name);
-            $console = new StreamHandler("php://stdout", Logger::DEBUG);
+            $console = new StreamHandler("php://stdout", Logger::ERROR);
             $log->pushHandler($console);
             $this->logger = $log;
         }

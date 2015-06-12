@@ -1,9 +1,9 @@
 <?php
 
+use paslandau\PageRank\Calculation\PageRank;
 use paslandau\PageRank\Edge;
 use paslandau\PageRank\Graph;
 use paslandau\PageRank\Node;
-use paslandau\PageRank\PageRank;
 
 class PageRankTest extends PHPUnit_Framework_TestCase
 {

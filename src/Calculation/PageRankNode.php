@@ -1,7 +1,14 @@
 <?php
 
-namespace paslandau\PageRank;
+namespace paslandau\PageRank\Calculation;
+use paslandau\PageRank\Node;
 
+/**
+ * Special Node that is used during the PageRank calculation of a Graph.
+ * The PageRankNode also holds it's PageRank value (that usually changes during the computation) as
+ * well es in- and outlinks for the efficient PageRank calculation.
+ * @package paslandau\PageRank
+ */
 class PageRankNode{
     /**
      * @var PageRankNode
@@ -45,6 +52,10 @@ class PageRankNode{
         $this->inlinks = [];
     }
 
+    /**
+     * Add a link from $this to Node $n
+     * @param PageRankNode $n
+     */
     public function addLinkTo(PageRankNode $n){
         if($this->collapseLinksToSamePageRankNode) {
             $this->outlinks[$n->getName()] = $n;
@@ -53,6 +64,10 @@ class PageRankNode{
         }
     }
 
+    /**
+     * Add a link from Node $n to $this
+     * @param PageRankNode $n
+     */
     public function addLinkFrom(PageRankNode $n){
         if($this->collapseLinksToSamePageRankNode) {
             $this->inlinks[$n->getName()] = $n;
@@ -61,6 +76,12 @@ class PageRankNode{
         }
     }
 
+    /**
+     * Calculates the current PageRank for this Node.
+     * @param $dampingFactor - the damping factor used to avoid rank sinks
+     * @param $totalPages - total number of pages in the current Graph
+     * @return float
+     */
     public function calculatePageRank($dampingFactor, $totalPages){
         $inLinkSum = 0;
         foreach($this->inlinks as $node){
