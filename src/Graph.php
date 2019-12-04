@@ -1,6 +1,8 @@
 <?php
 
 namespace paslandau\PageRank;
+use paslandau\PageRank\src\Node;
+use paslandu\Pagerank\src\Edge;
 
 
 class Graph {
@@ -8,6 +10,7 @@ class Graph {
      * @var Node[]
      */
     private $nodes;
+    
 
     /**
      * @var Edge[]
